@@ -1,14 +1,16 @@
 package com.portfolio.dev.thesisinfomgmt.utilities;
 
 import com.portfolio.dev.thesisinfomgmt.dtos.ErrorMessage;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.With;
 import org.springframework.http.HttpStatus;
 
 @NoArgsConstructor
-@Getter
-@Setter
+@AllArgsConstructor
+@Data
+@With
 public class ValidationResponse {
 
   public enum ValidationResult {
