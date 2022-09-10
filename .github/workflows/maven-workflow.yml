@@ -30,6 +30,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '11'
+          distribution: 'temurin'
 
       - name: Compile Code
         run: mvn compile
@@ -45,6 +46,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '11'
+          distribution: 'temurin'
 
       - name: Run Unit Tests
         run: mvn test
