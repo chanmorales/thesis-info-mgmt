@@ -23,4 +23,15 @@ public class ValidationResponse {
   private HttpStatus httpStatus;
 
   private ErrorMessage errorMessage;
+
+  public static ValidationResponse badRequest(String errorMessage) {
+    return new ValidationResponse(
+        ValidationResult.NG,
+        HttpStatus.BAD_REQUEST,
+        new ErrorMessage(errorMessage));
+  }
+
+  public static ValidationResponse ok() {
+    return new ValidationResponse(ValidationResult.OK, null, null);
+  }
 }

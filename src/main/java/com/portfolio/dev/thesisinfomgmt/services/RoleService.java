@@ -50,6 +50,7 @@ public interface RoleService {
   /**
    * Validate role details
    *
+   * @param roleId  id of the role to be validated
    * @param roleDTO role to be validated
    * @return validation response
    */

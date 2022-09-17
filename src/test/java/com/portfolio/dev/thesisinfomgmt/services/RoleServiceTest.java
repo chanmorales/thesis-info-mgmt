@@ -225,8 +225,10 @@ class RoleServiceTest {
     // Mock the return of roleRepository.findFirstByNameEqualsIgnoreCase
     Role validateRole = new Role().withId(1).withName("Researcher")
         .withDescription("This is an updated description.");
+    Role existingRole = new Role().withId(1).withName("Researcher")
+        .withDescription("This is a description.");
     when(roleRepository.findFirstByNameEqualsIgnoreCase(validateRole.getName()))
-        .thenReturn(Optional.of(validateRole));
+        .thenReturn(Optional.of(existingRole));
 
     // Assert that the return of roleService.validateRole is the same as expected
     ValidationResponse actualResponse =
@@ -236,7 +238,7 @@ class RoleServiceTest {
     verify(roleRepository).findFirstByNameEqualsIgnoreCase(validateRole.getName());
   }
 
-  @DisplayName("[TEST] Validate an invalid role since its name already existed.")
+  @DisplayName("[TEST] Validate an invalid role since its name already exists.")
   @Test
   void testValidateRoleExistingName() {
 
@@ -251,17 +253,17 @@ class RoleServiceTest {
     // Assert that the return of roleService.validateRole is the same as expected
     ValidationResponse actualResponse =
         roleService.validateRole(validateRole.getId(), new RoleDTO(validateRole));
-    ValidationResponse expectedResponse =
-        new ValidationResponse().withValidationResult(ValidationResult.NG)
-            .withHttpStatus(HttpStatus.BAD_REQUEST)
-            .withErrorMessage(
-                new ErrorMessage(String.format(ROLE_NAME_ALREADY_EXISTS, validateRole.getName())));
+    ValidationResponse expectedResponse = new ValidationResponse()
+        .withValidationResult(ValidationResult.NG)
+        .withHttpStatus(HttpStatus.BAD_REQUEST)
+        .withErrorMessage(new ErrorMessage(
+            String.format(ROLE_NAME_ALREADY_EXISTS, validateRole.getName())));
     assertThat(actualResponse).isEqualTo(expectedResponse);
 
     verify(roleRepository).findFirstByNameEqualsIgnoreCase(validateRole.getName());
   }
 
-  @DisplayName("[TEST] Validated an invalid role since its name is null.")
+  @DisplayName("[TEST] Validate an invalid role since its name is null.")
   @Test
   void testValidateRoleNullName() {
 
@@ -269,16 +271,16 @@ class RoleServiceTest {
     Role validateRole = new Role().withId(0).withName(null).withDescription("");
     ValidationResponse actualResponse =
         roleService.validateRole(validateRole.getId(), new RoleDTO(validateRole));
-    ValidationResponse expectedResponse =
-        new ValidationResponse().withValidationResult(ValidationResult.NG)
-            .withHttpStatus(HttpStatus.BAD_REQUEST)
-            .withErrorMessage(new ErrorMessage(ROLE_NAME_REQUIRED));
+    ValidationResponse expectedResponse = new ValidationResponse()
+        .withValidationResult(ValidationResult.NG)
+        .withHttpStatus(HttpStatus.BAD_REQUEST)
+        .withErrorMessage(new ErrorMessage(ROLE_NAME_REQUIRED));
     assertThat(actualResponse).isEqualTo(expectedResponse);
 
     verify(roleRepository, never()).findFirstByNameEqualsIgnoreCase(anyString());
   }
 
-  @DisplayName("[TEST] Validated an invalid role since its name is empty.")
+  @DisplayName("[TEST] Validate an invalid role since its name is empty.")
   @Test
   void testValidateRoleEmptyName() {
 
@@ -286,10 +288,10 @@ class RoleServiceTest {
     Role validateRole = new Role().withId(0).withName("").withDescription("");
     ValidationResponse actualResponse =
         roleService.validateRole(validateRole.getId(), new RoleDTO(validateRole));
-    ValidationResponse expectedResponse =
-        new ValidationResponse().withValidationResult(ValidationResult.NG)
-            .withHttpStatus(HttpStatus.BAD_REQUEST)
-            .withErrorMessage(new ErrorMessage(ROLE_NAME_REQUIRED));
+    ValidationResponse expectedResponse = new ValidationResponse()
+        .withValidationResult(ValidationResult.NG)
+        .withHttpStatus(HttpStatus.BAD_REQUEST)
+        .withErrorMessage(new ErrorMessage(ROLE_NAME_REQUIRED));
     assertThat(actualResponse).isEqualTo(expectedResponse);
 
     verify(roleRepository, never()).findFirstByNameEqualsIgnoreCase(anyString());
