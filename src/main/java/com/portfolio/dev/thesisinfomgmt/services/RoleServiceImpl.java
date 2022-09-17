@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.data.util.Streamable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -34,8 +33,11 @@ public class RoleServiceImpl implements RoleService {
    */
   @Override
   public List<RoleDTO> getAllRoles() {
-    List<Role> roles = Streamable.of(roleRepository.findAll()).toList();
-    return roles.stream().map(RoleDTO::new).collect(Collectors.toList());
+
+    return roleRepository.findAll()
+        .stream()
+        .map(RoleDTO::new)
+        .collect(Collectors.toList());
   }
 
   /**
@@ -44,7 +46,7 @@ public class RoleServiceImpl implements RoleService {
   @Override
   public RoleDTO createRole(RoleDTO roleDTO) {
 
-    Role role = MapperHelper.convertToRole(roleDTO);
+    Role role = MapperHelper.mapToRole(roleDTO);
     role = roleRepository.save(role);
     return new RoleDTO(role);
   }

@@ -4,6 +4,7 @@ import static com.portfolio.dev.thesisinfomgmt.utilities.Constants.ROLE_NAME_ALR
 import static com.portfolio.dev.thesisinfomgmt.utilities.Constants.ROLE_NAME_REQUIRED;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.never;
@@ -101,13 +102,13 @@ class RoleServiceTest {
   void testGetRoleByIdNotFound() {
 
     // Mock the return of roleRepository.findById
-    when(roleRepository.findById(1L)).thenReturn(Optional.empty());
+    when(roleRepository.findById(anyLong())).thenReturn(Optional.empty());
 
     // Assert the return of roleService.getRole is empty
     Optional<RoleDTO> actualRole = roleService.getRole(1);
     assertThat(actualRole).isEmpty();
 
-    verify(roleRepository).findById(1L);
+    verify(roleRepository).findById(anyLong());
   }
 
   @DisplayName("[TEST] Update an existing role.")
@@ -119,11 +120,11 @@ class RoleServiceTest {
         .withDescription("This is a description.");
     Role mockRole = new Role().withId(1).withName("Researcher Updated")
         .withDescription("This is an updated description.");
-    RoleDTO mockRoleDto = new RoleDTO(mockRole);
     when(roleRepository.findById(1L)).thenReturn(Optional.of(initRole));
     when(roleRepository.save(any(Role.class))).thenReturn(mockRole);
 
     // Assert the return of roleService.updateRole is not empty and is equal to the expected
+    RoleDTO mockRoleDto = new RoleDTO(mockRole);
     Optional<RoleDTO> actualRole = roleService.updateRole(1, mockRoleDto);
     assertThat(actualRole).isNotEmpty().contains(mockRoleDto);
 
