@@ -15,7 +15,7 @@ public interface RoleService {
   List<RoleDTO> getAllRoles();
 
   /**
-   * Create a role
+   * Creates a role
    *
    * @param roleDTO role to be created
    * @return created role
@@ -23,7 +23,7 @@ public interface RoleService {
   RoleDTO createRole(RoleDTO roleDTO);
 
   /**
-   * Retrieves a role.
+   * Retrieves a role
    *
    * @param roleId id of the role to be retrieved
    * @return optional retrieved role
@@ -31,10 +31,10 @@ public interface RoleService {
   Optional<RoleDTO> getRole(long roleId);
 
   /**
-   * Update a role
+   * Updates a role
    *
    * @param roleId  id of the role to be updated
-   * @param roleDTO role to be updated
+   * @param roleDTO updated role details
    * @return optional updated role
    */
   Optional<RoleDTO> updateRole(long roleId, RoleDTO roleDTO);
