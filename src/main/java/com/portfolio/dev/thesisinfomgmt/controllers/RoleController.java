@@ -97,14 +97,13 @@ public class RoleController {
   })
   @PostMapping(value = "",
       produces = { MediaType.APPLICATION_JSON_VALUE },
-      consumes = { MediaType.APPLICATION_JSON_VALUE }
-  )
+      consumes = { MediaType.APPLICATION_JSON_VALUE })
   public ResponseEntity<Object> createRole(
       @io.swagger.v3.oas.annotations.parameters.RequestBody(
           description = "New role request data", required = true,
           content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
               schema = @Schema(implementation = RoleDTO.class,
-              requiredProperties = { "name" }),
+                  requiredProperties = { "name" }),
               examples = @ExampleObject(value =
                   "{"
                 + "    \"id\": 0,\n"
@@ -214,10 +213,10 @@ public class RoleController {
               schema = @Schema(implementation = RoleDTO.class, requiredProperties = { "name" }),
               examples = @ExampleObject(value =
                   "{"
-                      + "    \"id\": 1,\n"
-                      + "    \"name\": \"Researcher\",\n"
-                      + "    \"description\": \"Researcher of the thesis / dissertation.\""
-                      + "}")))
+                + "    \"id\": 1,\n"
+                + "    \"name\": \"Researcher - Updated\",\n"
+                + "    \"description\": \"Researcher of the thesis / dissertation (updated).\""
+                + "}")))
       @RequestBody RoleDTO updatedRole
   ) {
     // Validate role details

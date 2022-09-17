@@ -1,6 +1,7 @@
 package com.portfolio.dev.thesisinfomgmt.services;
 
 import com.portfolio.dev.thesisinfomgmt.dtos.DegreeDTO;
+import com.portfolio.dev.thesisinfomgmt.utilities.ValidationResponse;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,4 +46,13 @@ public interface DegreeService {
    * @return optional deleted degree
    */
   Optional<DegreeDTO> deleteDegree(long degreeId);
+
+  /**
+   * Validate degree details
+   *
+   * @param degreeId  id of the degree to be validated
+   * @param degreeDTO degree to be validated
+   * @return validation response
+   */
+  ValidationResponse validateDegree(long degreeId, DegreeDTO degreeDTO);
 }

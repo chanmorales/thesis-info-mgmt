@@ -2,8 +2,10 @@ package com.portfolio.dev.thesisinfomgmt.dtos;
 
 import com.portfolio.dev.thesisinfomgmt.entities.Degree;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class DegreeDTO {
 
   /**
