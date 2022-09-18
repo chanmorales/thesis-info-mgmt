@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/degrees")
+@RequestMapping("/api/degrees")
 public class DegreeController {
 
   private final DegreeService degreeService;
